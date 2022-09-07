@@ -1,0 +1,32 @@
+.todo {
+  gap: 15px;
+  &__todo,
+  &__done {
+    height: fit-content !important;
+    border-radius: 0.5rem;
+    box-shadow: 10px 0 10px black;
+  }
+  &__done {
+    box-shadow: 10px 0 10px #07bc0c;
+  }
+}
+@media (max-width: 767px) {
+  .todo {
+    flex-direction: column;
+    &__todo {
+      padding: 1rem 0;
+    }
+
+    &__done {
+      padding: 1rem 0;
+    }
+  }
+}
+.splide__slide {
+  padding: 1rem;
+}
+.spinner {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}

@@ -1,0 +1,141 @@
+.addTodo {
+  &__input {
+    height: 48px;
+    border-radius: 32px !important;
+    color: aqua;
+    font-weight: 700;
+    &:focus {
+      box-shadow: 10px 0 1000px black;
+    }
+  }
+  &__submit {
+    border-radius: 2rem;
+    font-weight: 700;
+    &:hover {
+      transform: scale(0.9);
+      font-weight: 900;
+    }
+  }
+}
+.todoDetail {
+  background-color: yellow;
+  height: 4rem;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  transition: all 0.3s;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  &:hover {
+    transform: scale(0.95);
+  }
+  &__todo {
+    text-align: left;
+    margin-left: 2rem;
+    text-transform: capitalize;
+  }
+  &__update {
+    display: grid;
+    width: 80%;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+    .fa {
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+.spin {
+  position: fixed !important;
+  left: 5%;
+  top: 25%;
+}
+.ant-card {
+  box-shadow: 1px 1px 1px gray;
+  margin-right: 1rem !important;
+  transition: all 0.3s;
+  &:hover {
+    transform: scale(1.05);
+    .icon_delete {
+      display: block;
+    }
+  }
+  .icon_delete {
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    display: none;
+    transition: all 0.3s;
+  }
+
+  &-head {
+    background-color: rgb(177, 177, 211) !important;
+    text-transform: uppercase;
+    font-size: 20px !important;
+    font-weight: bold !important;
+  }
+  &-body {
+    padding: 10px !important;
+  }
+  .detail {
+    width: 100% !important;
+    min-width: 100% !important;
+
+    .icon_edit {
+      right: 5px;
+      top: 5px;
+      font-size: 16px;
+      display: none;
+      transition: all 0.3s;
+      color: blue;
+    }
+    &:hover {
+      .icon_edit {
+        display: block;
+      }
+    }
+    .ant-card {
+      width: 100% !important;
+      min-width: 100% !important;
+      background-color: rgb(208, 208, 219) !important;
+      &-body {
+      }
+      &:hover {
+        transform: scale(1);
+        border: solid 1px black !important;
+      }
+      &-head {
+        background-color: rgb(208, 208, 219) !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        border-bottom: none;
+        &-title {
+          padding: 10px !important;
+        }
+      }
+    }
+  }
+}
+.Popover_content {
+  p {
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover {
+      background-color: rgb(199, 194, 194);
+    }
+  }
+}
+.add_todo {
+  margin-top: 10px;
+  position: static !important;
+}
+.slick-slide {
+  width: auto !important;
+}
+@media (min-width: 768px) {
+}

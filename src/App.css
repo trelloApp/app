@@ -1,0 +1,12 @@
+#main {
+  height: 100vh;
+}
+#content {
+  /* display: flex; */
+  /* overflow: hidden !important; */
+  /* overflow-x: scroll !important; */
+  /* min-height: 90vh !important; */
+}
+.App.container {
+  /* overflow-x: hidden; */
+}
