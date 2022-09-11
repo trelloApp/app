@@ -71,6 +71,7 @@
     font-size: 20px;
     display: none;
     transition: all 0.3s;
+    position: absolute;
   }
 
   &-head {
@@ -85,7 +86,8 @@
   .detail {
     width: 100% !important;
     min-width: 100% !important;
-
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0 2px black;
     .icon_edit {
       right: 5px;
       top: 5px;
@@ -93,6 +95,7 @@
       display: none;
       transition: all 0.3s;
       color: blue;
+      position: absolute;
     }
     &:hover {
       .icon_edit {
@@ -129,6 +132,18 @@
       background-color: rgb(199, 194, 194);
     }
   }
+}
+.modal_content {
+  .todo {
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}
+.loading {
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  transition: all 0.3s;
 }
 .add_todo {
   margin-top: 10px;

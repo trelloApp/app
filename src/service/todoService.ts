@@ -4,6 +4,7 @@ const getAllTodos = gql`
     todos {
       id
       todo
+      content
       createdAt
       authorId {
         id
@@ -21,6 +22,7 @@ const getTodosById = gql`
     todo(id: $id) {
       id
       todo
+      content
       createdAt
       authorId {
         id
@@ -36,12 +38,14 @@ const getTodosById = gql`
 const createTodo = gql`
   mutation addTodo(
     $todo: String!
+    $content: String
     $authorID: ID
     $employeeID: ID
     $listID: String
   ) {
     createTodo(
       todo: $todo
+      content: $content
       authorID: $authorID
       employeeID: $employeeID
       listID: $listID
@@ -61,16 +65,17 @@ const createTodo = gql`
   }
 `;
 const updateTodo = gql`
-  mutation {
-    updateTodo(id: ID, todo: String, authorId: String, employeeId: String) {
+  mutation update($id: ID!, $employeeId: String, $content: String) {
+    updateTodo(id: $id, employeeId: $employeeId, content: $content) {
       id
       todo
       createdAt
-      author {
+      content
+      authorId {
         id
         name
       }
-      employee {
+      employeeId {
         id
         name
       }
@@ -84,11 +89,32 @@ const deleteTodo = gql`
     }
   }
 `;
+const updateDroppable = gql`
+  mutation droppable(
+    $id: ID!
+    $currentListId: String
+    $listId: String
+    $index: Int
+  ) {
+    updateDroppable(
+      id: $id
+      currentListId: $currentListId
+      listId: $listId
+      index: $index
+    ) {
+      id
+      currentListId
+      listId
+      index
+    }
+  }
+`;
 const todoService = {
   getAllTodos,
   getTodosById,
   createTodo,
   updateTodo,
   deleteTodo,
+  updateDroppable,
 };
 export default todoService;

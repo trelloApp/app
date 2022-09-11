@@ -1,8 +1,9 @@
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { useMutation } from "@apollo/client";
-import { Button, Card, Input, Modal, Tooltip, Form, Select } from "antd";
+import { Button, Card, Input, Modal, Tooltip, Form, Select, Spin } from "antd";
 
 import React, { useState } from "react";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import {
   errorShow,
   success,
@@ -11,6 +12,7 @@ import {
 import listTodosService from "../service/listTodosService";
 import { ListTodoPros } from "../service/serviceInterface";
 import todoService from "../service/todoService";
+import ModalEditContent from "./ModalEditContent";
 
 import "./style/todoTask.scss";
 import TabDetail from "./TabDetail";
@@ -52,11 +54,13 @@ const Todotab: React.FC<Props> = ({ tab }) => {
   };
   const handleOk = () => {
     setConfirmLoading(true);
+    console.log("value", form.getFieldsValue(true));
     setTimeout(() => {
       const data = form.getFieldsValue(true);
       addTodo({
         variables: {
           todo: data.todo,
+          content: data.content,
           employeeID: data.employeeID,
           authorID: "",
           listID: tab?.id,
@@ -69,27 +73,53 @@ const Todotab: React.FC<Props> = ({ tab }) => {
       form.resetFields();
     }, 1000);
   };
-  console.log("tab", tab);
   return (
-    <div className="site-card-border-less-wrapper position-relative ">
-      <Card title={tab.name} bordered={true}>
-        {tab.list?.map((id) => (
-          <TabDetail id={id} listId={tab.id} />
-        ))}
-        <Tooltip
-          title="Please add new to do"
-          color="#87d068"
-          key="#87d068"
-          className="add_todo"
-        >
-          <Button onClick={showModal}>ADD</Button>
-        </Tooltip>
-        <CloseCircleOutlined
-          onClick={() => handleDelete(tab.id)}
-          className="position-absolute icon_delete"
-        />
-      </Card>
-
+    <>
+      <Droppable droppableId={tab.id}>
+        {(provided, snapshot) => (
+          <div
+            className="site-card-border-less-wrapper position-relative item"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            <Card title={tab.name} bordered={true}>
+              {tab.list?.map((id, i) => (
+                <TabDetail
+                  id={id}
+                  className={
+                    snapshot.isDraggingOver
+                      ? "isDraggingOver"
+                      : "isUsingPlaceholder"
+                  }
+                  listId={tab.id}
+                  key={id}
+                  index={i}
+                />
+              ))}
+              <Tooltip
+                title="Please add new to do"
+                color="#87d068"
+                key="#87d068"
+                className="add_todo"
+              >
+                <Button onClick={showModal}>ADD</Button>
+              </Tooltip>
+              <CloseCircleOutlined
+                onClick={() => handleDelete(tab.id)}
+                className="position-absolute icon_delete"
+              />
+              <Spin
+                className={
+                  !loading
+                    ? "d-none position-absolute loading"
+                    : "position-absolute loading"
+                }
+              />
+            </Card>
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
       <Modal
         title="ADD TO DO"
         visible={visible}
@@ -101,6 +131,9 @@ const Todotab: React.FC<Props> = ({ tab }) => {
           <Form.Item label="Name Of To Do" name="todo" required>
             <Input placeholder="Please Enter Name" name="todo" />
           </Form.Item>
+          <Form.Item label="content" name="content">
+            <Input.TextArea rows={5} />
+          </Form.Item>
           <Form.Item label="Author ID" name="employeeID">
             <Select defaultValue="">
               <Option value="">Please Choose Employee </Option>
@@ -110,7 +143,8 @@ const Todotab: React.FC<Props> = ({ tab }) => {
           </Form.Item>
         </Form>
       </Modal>
-    </div>
+      <ModalEditContent />
+    </>
   );
 };
 

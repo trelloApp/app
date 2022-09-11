@@ -1,3 +1,13 @@
+.item {
+  width: 33.33%;
+  min-width: 33.33%;
+}
+@media (max-width: 1024px) {
+  .item {
+    width: 50%;
+    min-width: 50%;
+  }
+}
 .todo {
   gap: 15px;
   &__todo,

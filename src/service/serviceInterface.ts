@@ -1,7 +1,7 @@
 export type TodoPros = {
   id: string;
   todo: string;
-  status: number;
+  content: string;
   authorId: AuthorProps;
   employeeId: EmployeePro;
   createdAt: string;

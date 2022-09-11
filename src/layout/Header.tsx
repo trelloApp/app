@@ -1,53 +1,46 @@
-import React from "react";
-import {
-  Navbar,
-  Container,
-  Nav,
-  NavDropdown,
-  Button,
-  Form,
-  FormControl,
-} from "react-bootstrap";
+import { Button, Drawer, Menu } from "antd";
+import React, { useState } from "react";
+import LeftMenu from "./LeftMenu";
+import RightMenu from "./RightMenu";
+import "./menu.css";
+import { MenuOutlined } from "@ant-design/icons";
+
 const Header: React.FC = () => {
+  const [menu, setMenu] = useState(false);
   return (
-    <Navbar bg="primary" variant="dark" expand="lg">
-      <Container fluid>
-        <Navbar.Brand href="/#">Home</Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: "100px" }}
-            navbarScroll
+    <>
+      <nav className="menuBar">
+        <div className="logo">
+          <a href="www.marca.com">logo</a>
+        </div>
+        <div className="menuCon">
+          <div className="leftMenu">
+            <LeftMenu />
+          </div>
+          <div className="rightMenu">
+            <RightMenu />
+          </div>
+
+          <Button
+            className="barsMenu"
+            type="primary"
+            onClick={() => setMenu(true)}
           >
-            <Nav.Link href="/todoTask">To Do Task</Nav.Link>
-            <Nav.Link href="/pokemon">Show Pokemon </Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#" disabled>
-              Link
-            </Nav.Link>
-          </Nav>
-          <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+            <MenuOutlined className="menu_icon" />
+          </Button>
+          <Drawer
+            title="Basic Drawer"
+            placement="left"
+            closable={false}
+            onClose={() => setMenu(false)}
+            visible={menu}
+          >
+            <LeftMenu />
+            <RightMenu />
+          </Drawer>
+        </div>
+      </nav>
+    </>
   );
 };
 

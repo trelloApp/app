@@ -1,0 +1,13 @@
+.ant-form-item {
+  &-row {
+    display: block !important;
+    .ant-form-item-control {
+      width: 100% !important;
+    }
+  }
+}
+.editContent {
+  color: blue;
+  font-size: 24px;
+  margin-left: 1rem;
+}
